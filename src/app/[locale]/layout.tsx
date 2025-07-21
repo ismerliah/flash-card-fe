@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Inter, Kanit, Roboto } from "next/font/google";
 import "./globals.css";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
@@ -13,6 +13,17 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const getRoboto = Roboto({
+  variable: "--font-roboto",
+  subsets: ["latin"],
+});
+
+const getKanit = Kanit({
+  variable: "--font-kanit",
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
@@ -34,7 +45,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={locale === "en" ? getRoboto.className : getKanit.className}
       >
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
       </body>
